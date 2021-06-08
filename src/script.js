@@ -9,7 +9,8 @@ var GENESIS = '0x000000000000000000000000000000000000000000000000000000000000000
 
 // This is the ABI for your contract (get it from Remix, in the 'Compile' tab)
 // ============================================================
-var abi = [
+var abi = 
+[
 	{
 		"inputs": [
 			{
@@ -68,7 +69,7 @@ var abi = [
 abiDecoder.addABI(abi);
 // call abiDecoder.decodeMethod to use this - see 'getAllFunctionCalls' for more
 
-var contractAddress = '0x931574C6dD27455dBE1097565b70Bc870C48b38F'; 
+var contractAddress = '0x0E4277D11593670314123b265CC83C2a975d7799'; 
 var BlockchainSplitwise = new web3.eth.Contract(abi, contractAddress);
 
 // =============================================================================
@@ -287,7 +288,7 @@ getUsers().then((response)=>{
 $("#addiou").click(function() {
 	web3.eth.defaultAccount = $("#myaccount").val(); //sets the default account
   add_IOU($("#creditor").val(), $("#amount").val()).then((response)=>{
-		window.location.reload(false); // refreshes the page after add_IOU returns and the promise is unwrapped
+		window.location.reload(true); // refreshes the page after add_IOU returns and the promise is unwrapped
 	})
 });
 

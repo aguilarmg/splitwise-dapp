@@ -1,5 +1,10 @@
-pragma solidity >=0.5.0 <0.6.0;
+pragma solidity ^0.6.6;
 
+/*
+ * @title Splitwise
+ * @author miguelaguilar.eth
+ * @dev Implement the Splitwise application in a decentralised manner.
+ */
 contract Splitwise {
     // Keep track of who a debtor owes money to and the amount of owed to each creditor.
     mapping(address => mapping(address => uint32)) debts;
@@ -69,6 +74,9 @@ contract Splitwise {
         require(_path.length < 10);
         // Decrement the debts owed by an amount of _minDebt.
         for (uint16 i = 0; i < _path.length - 1; i++) {
+            // Require that every edge in the cycle is greater than or equal to the presumed
+            // _minDebt along the cycle.
+            require(lookup(_path[i], _path[i+1]) >= _minDebt, "minDebt was not valid.");
             debts[_path[i]][_path[i + 1]] -= _minDebt;
         }
         
